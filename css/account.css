@@ -1,0 +1,16 @@
+.account-dialog{width:min(92vw,440px);max-width:440px;padding:0;border:0;border-radius:8px;background:#f9faf6;color:#263832;box-shadow:0 24px 80px #15251f55}
+.account-dialog::backdrop{background:#19272199;backdrop-filter:blur(3px)}
+.account-form{position:relative;padding:36px 38px 32px;display:grid;gap:14px}
+.account-form .eyebrow{margin:0 0 -7px}
+.account-form h2{font-size:25px;letter-spacing:-.05em;margin:0 0 5px}
+.account-form label{display:grid;gap:6px;font-size:12px;font-weight:600;color:#59665e}
+.account-form input{width:100%;height:43px;padding:0 12px;border:1px solid #d9ded7;border-radius:3px;background:#fff;color:#24352d;font-size:13px}
+.account-form input:focus{border-color:#738b79;outline:2px solid #738b7933}
+.form-submit{height:47px;margin-top:3px;border:0;border-radius:3px;background:#435e4e;color:white;font-size:13px;font-weight:600;cursor:pointer}
+.form-submit:hover{background:#334d3f}
+.form-submit:disabled{opacity:.58;cursor:wait}
+.form-status{min-height:16px;margin:0;color:#8e5048;font-size:11px}
+.dialog-close{position:absolute;right:17px;top:12px;border:0;background:transparent;color:#65736a;font-size:25px;cursor:pointer}
+@media(max-width:480px){.account-form{padding:32px 24px 25px}.account-form h2{font-size:22px}}
+.flow-page{min-height:100vh;background:#f5f6f1}.flow-header{height:70px;padding:0 max(20px,calc((100% - 1080px)/2));display:flex;align-items:center;justify-content:space-between;background:#fbfcf8;border-bottom:1px solid #e6eae2}.flow-header>a:last-child{font-size:12px;color:#52695a}.flow-main{width:min(100% - 36px,560px);margin:55px auto 80px}.flow-wide{width:min(100% - 36px,850px)}.back-link{font-size:11px;color:#79867d}.flow-main>.eyebrow{margin:34px 0 7px}.flow-main h1{font-size:31px;letter-spacing:-.06em;margin:0 0 8px}.flow-intro{font-size:12px;line-height:1.7;color:#7f8981;margin:0 0 25px}.flow-form{padding:25px;background:#fff;border:1px solid #e3e8df;border-radius:5px;display:grid;gap:15px}.flow-form label{display:grid;gap:6px;font-size:12px;font-weight:600;color:#5e6d62}.flow-form input,.flow-form select{height:45px;width:100%;padding:0 12px;border:1px solid #dfe4dc;border-radius:3px;background:#fff;color:#2f4035;font-size:12px}.form-columns{display:grid;grid-template-columns:1fr 1fr;gap:12px}.flow-status{font-size:11px;color:#657d69;margin:0}.flow-status[hidden]{display:none}.flow-status.is-error{color:#a14d41}.flow-form .form-submit{width:100%}.reservation-list{display:grid;gap:12px}.reservation-item{position:relative;padding:22px;background:#fff;border:1px solid #e3e8df;border-radius:5px}.reservation-item h2{font-size:14px;margin:0 0 9px}.reservation-status{display:inline-flex;border-radius:3px;background:#edf1eb;color:#5c725f;padding:5px 8px;font-size:10px}.reservation-details{font-size:11px;color:#78837a;margin:11px 0 0}.inline-action{margin-top:14px;padding:8px 11px;border:1px solid #dce2da;border-radius:3px;background:#fff;color:#8a564a;font-size:10px;cursor:pointer}.inline-action:disabled{opacity:.6}
+@media(max-width:620px){.flow-header{height:62px;padding:0 18px}.flow-main{margin-top:38px}.flow-main h1{font-size:27px}.flow-form{padding:19px}.form-columns{grid-template-columns:1fr}}

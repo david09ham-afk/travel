@@ -1,0 +1,81 @@
+{
+  "rules": {
+    "destinations": {
+      ".read": "(auth != null && auth.token.admin === true) || (query.orderByChild === 'status' && query.equalTo === 'published')",
+      ".write": "auth != null && auth.token.admin === true",
+      ".indexOn": ["status"],
+      "$id": {
+        ".validate": "newData.hasChildren(['name', 'region', 'address', 'description', 'imageUrl', 'status', 'createdAt', 'updatedAt']) && (newData.child('status').val() === 'draft' || newData.child('status').val() === 'published' || newData.child('status').val() === 'archived')",
+        "name": { ".validate": "newData.isString() && newData.val().length <= 100" },
+        "region": { ".validate": "newData.isString() && newData.val().length <= 100" },
+        "address": { ".validate": "newData.isString() && newData.val().length <= 200" },
+        "description": { ".validate": "newData.isString() && newData.val().length <= 2000" },
+        "imageUrl": { ".validate": "newData.isString()" },
+        "status": { ".validate": "newData.isString()" },
+        "createdAt": { ".validate": "newData.isNumber()" },
+        "updatedAt": { ".validate": "newData.isNumber()" },
+        "$other": { ".validate": false }
+      }
+    },
+    "stays": {
+      ".read": "(auth != null && auth.token.admin === true) || (query.orderByChild === 'status' && query.equalTo === 'published')",
+      ".write": "auth != null && auth.token.admin === true",
+      ".indexOn": ["status"],
+      "$id": {
+        ".validate": "newData.hasChildren(['destinationId', 'name', 'address', 'description', 'imageUrl', 'pricePerNight', 'maxGuests', 'contact', 'status', 'createdAt', 'updatedAt']) && (newData.child('status').val() === 'draft' || newData.child('status').val() === 'published' || newData.child('status').val() === 'archived') && root.child('destinations').child(newData.child('destinationId').val()).exists()",
+        "destinationId": { ".validate": "newData.isString()" },
+        "name": { ".validate": "newData.isString() && newData.val().length <= 100" },
+        "address": { ".validate": "newData.isString() && newData.val().length <= 200" },
+        "description": { ".validate": "newData.isString() && newData.val().length <= 2000" },
+        "imageUrl": { ".validate": "newData.isString()" },
+        "pricePerNight": { ".validate": "newData.isNumber() && newData.val() > 0" },
+        "maxGuests": { ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 30" },
+        "contact": { ".validate": "newData.isString() && newData.val().length <= 100" },
+        "status": { ".validate": "newData.isString()" },
+        "createdAt": { ".validate": "newData.isNumber()" },
+        "updatedAt": { ".validate": "newData.isNumber()" },
+        "$other": { ".validate": false }
+      }
+    },
+    "members": {
+      ".read": "auth != null && auth.token.admin === true",
+      ".write": "auth != null && auth.token.admin === true",
+      "$uid": {
+        ".read": "auth != null && (auth.uid === $uid || auth.token.admin === true)",
+        ".write": "auth != null && (auth.token.admin === true || (auth.uid === $uid && ((!data.exists() && newData.child('role').val() === 'member' && newData.child('status').val() === 'active' && newData.child('email').val() === auth.token.email) || (data.exists() && newData.child('role').val() === data.child('role').val() && newData.child('role').val() === 'member' && newData.child('status').val() === data.child('status').val() && newData.child('email').val() === data.child('email').val() && newData.child('createdAt').val() === data.child('createdAt').val()))))",
+        ".validate": "newData.hasChildren(['name', 'email', 'phone', 'role', 'status', 'createdAt', 'updatedAt']) && newData.child('role').val() === 'member' && (newData.child('status').val() === 'active' || newData.child('status').val() === 'suspended' || newData.child('status').val() === 'deleted') && (auth.token.admin === true || newData.child('email').val() === auth.token.email)",
+        "name": { ".validate": "newData.isString() && newData.val().length <= 60" },
+        "email": { ".validate": "newData.isString()" },
+        "phone": { ".validate": "newData.isString() && newData.val().length <= 30" },
+        "role": { ".validate": "newData.isString() && newData.val() === 'member'" },
+        "status": { ".validate": "newData.isString()" },
+        "createdAt": { ".validate": "newData.isNumber()" },
+        "updatedAt": { ".validate": "newData.isNumber()" },
+        "$other": { ".validate": false }
+      }
+    },
+    "reservations": {
+      ".read": "(auth != null && auth.token.admin === true) || (auth != null && query.orderByChild === 'memberId' && query.equalTo === auth.uid)",
+      ".write": "auth != null && auth.token.admin === true",
+      ".indexOn": ["memberId", "status"],
+      "$reservationId": {
+        ".read": "auth != null && (auth.token.admin === true || data.child('memberId').val() === auth.uid)",
+        ".write": "auth != null && (auth.token.admin === true || (!data.exists() && newData.child('memberId').val() === auth.uid && newData.child('status').val() === 'pending' && root.child('stays').child(newData.child('stayId').val()).child('status').val() === 'published' && newData.child('destinationId').val() === root.child('stays').child(newData.child('stayId').val()).child('destinationId').val() && newData.child('pricePerNight').val() === root.child('stays').child(newData.child('stayId').val()).child('pricePerNight').val() && newData.child('guestCount').val() <= root.child('stays').child(newData.child('stayId').val()).child('maxGuests').val() && newData.child('checkOut').val() > newData.child('checkIn').val()) || (data.child('memberId').val() === auth.uid && data.child('status').val() === 'pending' && newData.child('status').val() === 'cancelled' && newData.child('memberId').val() === auth.uid && newData.child('stayId').val() === data.child('stayId').val() && newData.child('destinationId').val() === data.child('destinationId').val() && newData.child('checkIn').val() === data.child('checkIn').val() && newData.child('checkOut').val() === data.child('checkOut').val() && newData.child('guestCount').val() === data.child('guestCount').val() && newData.child('nights').val() === data.child('nights').val() && newData.child('pricePerNight').val() === data.child('pricePerNight').val() && newData.child('totalPrice').val() === data.child('totalPrice').val() && newData.child('createdAt').val() === data.child('createdAt').val()))",
+        ".validate": "newData.hasChildren(['memberId', 'stayId', 'destinationId', 'checkIn', 'checkOut', 'guestCount', 'nights', 'pricePerNight', 'totalPrice', 'status', 'createdAt', 'updatedAt']) && (newData.child('status').val() === 'pending' || newData.child('status').val() === 'confirmed' || newData.child('status').val() === 'rejected' || newData.child('status').val() === 'cancelled' || newData.child('status').val() === 'completed') && newData.child('checkOut').val() > newData.child('checkIn').val() && newData.child('totalPrice').val() === newData.child('nights').val() * newData.child('pricePerNight').val()",
+        "memberId": { ".validate": "newData.isString()" },
+        "stayId": { ".validate": "newData.isString()" },
+        "destinationId": { ".validate": "newData.isString()" },
+        "checkIn": { ".validate": "newData.isString() && newData.val().matches(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/)" },
+        "checkOut": { ".validate": "newData.isString() && newData.val().matches(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/)" },
+        "guestCount": { ".validate": "newData.isNumber() && newData.val() >= 1" },
+        "nights": { ".validate": "newData.isNumber() && newData.val() >= 1" },
+        "pricePerNight": { ".validate": "newData.isNumber() && newData.val() > 0" },
+        "totalPrice": { ".validate": "newData.isNumber() && newData.val() > 0" },
+        "status": { ".validate": "newData.isString()" },
+        "createdAt": { ".validate": "newData.isNumber()" },
+        "updatedAt": { ".validate": "newData.isNumber()" },
+        "$other": { ".validate": false }
+      }
+    }
+  }
+}

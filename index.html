@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f3">
+  <meta name="description" content="마음이 향하는 곳으로. 국내 여행지와 머물기 좋은 숙소를 찾아보세요.">
+  <title>여행의 온도 | 국내 여행과 숙소</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/account.css">
+  <script type="module" src="js/site-auth.js"></script>
+  <script type="module" src="js/home.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 바로가기</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="여행의 온도 홈">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span>여행의 온도</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="메뉴 열기"><span></span><span></span></button>
+      <nav class="primary-nav" id="primary-nav" aria-label="주 메뉴">
+        <a class="nav-link is-active" href="#destinations">여행지</a>
+        <a class="nav-link" href="#stays">숙소</a>
+        <a class="nav-link" href="#guide">여행 가이드</a>
+      </nav>
+      <div class="account-actions">
+        <button class="header-action reserve-action" type="button" data-action="reserve">예약</button>
+        <button class="header-action signup-action" type="button" data-dialog="signup-dialog">회원가입</button>
+        <button class="header-action login-action" type="button" data-dialog="login-dialog">로그인</button>
+        <button class="header-action admin-action" type="button" data-dialog="admin-login-dialog">관리자</button>
+        <button class="header-action logout-action" id="member-logout" type="button" hidden>로그아웃</button>
+        <button class="header-action admin-logout-action" id="admin-logout" type="button" hidden>관리자 로그아웃</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-art" aria-hidden="true">
+        <div class="sun"></div><div class="cloud cloud-one"></div><div class="cloud cloud-two"></div>
+        <div class="hill hill-back"></div><div class="hill hill-front"></div>
+        <div class="sea"></div><div class="shore"></div><div class="hero-grain"></div>
+      </div>
+      <div class="hero-content">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> FIND YOUR OWN PACE</p>
+        <h1 id="hero-title">마음이 향하는 곳으로,<br><em>여행의 온도</em></h1>
+        <p class="hero-copy">익숙한 하루에서 한 걸음 벗어나<br class="mobile-only"> 나만의 풍경을 만나보세요.</p>
+        <a class="button button-dark hero-cta" href="#destinations">여행지 둘러보기 <span aria-hidden="true">↘</span></a>
+      </div>
+      <div class="hero-caption"><span>01 — 03</span><span>JEJU, KOREA</span></div>
+      <a class="scroll-cue" href="#destinations" aria-label="아래로 이동"><span></span></a>
+    </section>
+
+    <section class="search-section" aria-label="여행지 검색">
+      <form class="search-bar" id="destination-search">
+        <label class="search-field search-place" for="region">
+          <span class="field-icon" aria-hidden="true">⌖</span>
+          <span class="field-text"><span class="field-label">어디로 떠나세요?</span>
+            <select id="region" name="region"><option value="all">여행지 전체</option><option value="제주">제주도</option><option value="강릉">강릉</option><option value="부산">부산</option></select>
+          </span>
+        </label>
+        <span class="search-divider" aria-hidden="true"></span>
+        <label class="search-field" for="checkin">
+          <span class="field-icon" aria-hidden="true">▦</span>
+          <span class="field-text"><span class="field-label">여행 날짜</span><input id="checkin" name="checkin" type="date" aria-label="체크인 날짜"></span>
+        </label>
+        <span class="search-divider" aria-hidden="true"></span>
+        <label class="search-field search-guests" for="guests">
+          <span class="field-icon" aria-hidden="true">♧</span>
+          <span class="field-text"><span class="field-label">여행 인원</span><select id="guests" name="guests"><option value="1">1명</option><option value="2" selected>2명</option><option value="3">3명</option><option value="4">4명</option></select></span>
+        </label>
+        <label class="search-field search-keyword" for="keyword">
+          <span class="field-icon" aria-hidden="true">⌕</span>
+          <span class="field-text"><span class="field-label">키워드 검색</span><input id="keyword" name="keyword" type="search" placeholder="여행지·숙소"></span>
+        </label>
+        <button class="search-submit" type="submit"><span>여행지 찾기</span><span aria-hidden="true">↗</span></button>
+      </form>
+      <p class="search-note" id="search-note" aria-live="polite">여행 날짜는 숙소 예약 요청 단계에서 확인할 수 있어요.</p>
+    </section>
+
+    <section class="section destinations-section" id="destinations" aria-labelledby="destinations-title">
+      <div class="section-heading">
+        <div><p class="eyebrow section-eyebrow">PLACES TO GO</p><h2 id="destinations-title">이번 여행은 <em>어디로</em> 갈까요?</h2></div>
+        <a class="text-link" href="#stays">모든 여행지 보기 <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="destination-grid" id="destination-grid" aria-live="polite"></div>
+      <p class="results-state" id="destination-state" aria-live="polite">Firebase에서 여행지 정보를 불러오는 중입니다.</p>
+    </section>
+
+    <section class="stay-section" id="stays" aria-labelledby="stays-title">
+      <div class="section stay-inner">
+        <div class="section-heading">
+          <div><p class="eyebrow section-eyebrow">A PLACE TO STAY</p><h2 id="stays-title">오래 기억될 <em>머무름</em></h2><p class="section-description">여행의 하루를 편안하게 채워줄 숙소를 만나보세요.</p></div>
+          <a class="text-link" href="#guide">숙소 더 보기 <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="stay-grid" id="stay-grid" aria-live="polite"></div>
+        <p class="results-state" id="stay-state" aria-live="polite">Firebase에서 숙소 정보를 불러오는 중입니다.</p>
+        <p class="results-empty" id="results-empty" hidden>선택한 지역에 등록된 숙소가 없습니다. 다른 지역을 선택해 주세요.</p>
+      </div>
+    </section>
+
+    <section class="guide-section" id="guide" aria-labelledby="guide-title">
+      <div class="guide-copy"><p class="eyebrow">A LITTLE GUIDE</p><h2 id="guide-title">여행은 천천히,<br><em>나답게.</em></h2><p>좋은 여행은 멀리 가는 것보다<br>내게 맞는 속도를 찾는 일일지도 몰라요.</p><a class="button button-light" href="#destinations">나만의 여행 찾기 <span aria-hidden="true">↗</span></a></div>
+      <div class="guide-visual" aria-hidden="true"><div class="guide-circle"></div><div class="guide-path"></div><span class="guide-stamp">TAKE<br>IT SLOW</span><span class="guide-leaf leaf-one"></span><span class="guide-leaf leaf-two"></span></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="footer-main"><a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span>여행의 온도</span></a><p>나만의 속도로 떠나는 국내 여행</p><nav aria-label="하단 메뉴"><a href="#destinations">여행지</a><a href="#stays">숙소</a><a href="html/policies.html">이용 안내</a></nav></div><div class="footer-bottom"><span>© 2026 여행의 온도</span><span>여행의 순간을 조금 더 따뜻하게</span></div></footer>
+  <dialog class="account-dialog" id="signup-dialog" aria-labelledby="signup-title">
+    <form class="account-form" id="signup-form">
+      <button class="dialog-close" type="button" aria-label="닫기">×</button>
+      <p class="eyebrow">WELCOME</p><h2 id="signup-title">회원가입</h2>
+      <label>이름<input name="name" autocomplete="name" required maxlength="60"></label>
+      <label>이메일<input name="email" type="email" autocomplete="email" required></label>
+      <label>연락처<input name="phone" type="tel" autocomplete="tel" required maxlength="30"></label>
+      <label>비밀번호<input name="password" type="password" autocomplete="new-password" minlength="6" required></label>
+      <button class="form-submit" type="submit">가입하기</button>
+      <p class="form-status" aria-live="polite"></p>
+    </form>
+  </dialog>
+  <dialog class="account-dialog" id="login-dialog" aria-labelledby="login-title">
+    <form class="account-form" id="login-form">
+      <button class="dialog-close" type="button" aria-label="닫기">×</button>
+      <p class="eyebrow">WELCOME BACK</p><h2 id="login-title">로그인</h2>
+      <label>이메일<input name="email" type="email" autocomplete="email" required></label>
+      <label>비밀번호<input name="password" type="password" autocomplete="current-password" required></label>
+      <button class="form-submit" type="submit">로그인</button>
+      <p class="form-status" aria-live="polite"></p>
+    </form>
+  </dialog>
+  <dialog class="account-dialog" id="admin-login-dialog" aria-labelledby="admin-login-title">
+    <form class="account-form" id="admin-login-form">
+      <button class="dialog-close" type="button" aria-label="닫기">×</button>
+      <p class="eyebrow">ADMIN ONLY</p><h2 id="admin-login-title">관리자 로그인</h2>
+      <label>관리자 이메일<input name="email" type="email" autocomplete="username" required></label>
+      <label>비밀번호<input name="password" type="password" autocomplete="current-password" required></label>
+      <button class="form-submit" type="submit">관리자 로그인</button>
+      <p class="form-status" aria-live="polite"></p>
+    </form>
+  </dialog>
+  <button class="back-to-top" type="button" aria-label="화면 맨 위로 이동" title="맨 위로" hidden><span aria-hidden="true">↑</span></button>
+</body>
+</html>
